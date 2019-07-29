@@ -1,0 +1,218 @@
+! inlist_massive_defaults
+
+
+&star_job
+
+         show_log_description_at_start = .true.
+
+	history_columns_file = 'hist_cols.list'
+
+         kappa_file_prefix = 'a09'
+         kappa_lowT_prefix = 'lowT_fa05_a09p'
+
+         change_v_flag = .true.
+         new_v_flag = .true.
+
+         set_initial_age = .true.
+         initial_age = 0 ! in years
+
+         set_initial_model_number = .true.
+         initial_model_number = 0
+
+         set_rates_preference = .true.
+	new_rates_preference = 1 !NACRE, as GENEC
+
+
+	pause_before_terminate = .false.
+
+
+/ ! end of star_job namelist
+
+
+&controls
+
+	which_atm_option = 'Eddington_grey'
+
+      varcontrol_target = 1e-5
+         max_allowed_nz = 1000000 !numero bem alto mesmo
+      max_dq = 0.005
+
+	mesh_delta_coeff = 1
+         mesh_delta_coeff_for_highT = 1
+         logT_max_for_standard_mesh_delta_coeff = 9.0
+         logT_min_for_highT_mesh_delta_coeff = 9.5
+
+	!controles de mesh para regiões de queima
+	   mesh_dlog_pp_dlogP_extra = 0.015
+	   mesh_dlog_cno_dlogP_extra = 0.015
+	   mesh_dlog_3alf_dlogP_extra = 0.015
+	   mesh_dlog_burn_c_dlogP_extra = 0.015
+	   mesh_dlog_burn_n_dlogP_extra = 0.015
+	   mesh_dlog_burn_o_dlogP_extra = 0.015
+	   mesh_dlog_burn_ne_dlogP_extra = 0.015
+	   mesh_dlog_burn_na_dlogP_extra = 0.015
+	   mesh_dlog_burn_mg_dlogP_extra = 0.015
+	   mesh_dlog_cc_dlogP_extra = 0.015
+	   mesh_dlog_co_dlogP_extra = 0.015
+
+	history_interval = 10
+	photo_interval = 100
+!--
+
+         ! high center T limit to avoid negative mass fractions
+         sig_min_factor_for_high_Tcenter = 0.01
+          ! inactive when >= 1d0
+            ! if Tcenter >= Tcenter_min_for_sig_min_factor_full_on,
+            ! then okay to reduce sig by as much as this factor
+            ! as needed to prevent causing negative abundances
+         Tcenter_min_for_sig_min_factor_full_on = 3.2d9
+            ! if Tcenter >= this, factor = sig_min_factor_for_neg_abundances
+            ! this should be > Tcenter_max_for_sig_min_factor_full_off.
+         Tcenter_max_for_sig_min_factor_full_off = 2.8d9
+            ! if Tcenter <= this, factor = 1, so has no effect
+            ! this should be < Tcenter_min_for_sig_min_factor_full_on.
+         ! for T > full_off and < full_on, factor changes linearly with Tcenter
+
+         velocity_logT_lower_bound = 8
+         max_dt_yrs_for_velocity_logT_lower_bound = 0.1
+
+         dX_nuc_drop_limit = 1.0d-4 !Renzo
+         dX_nuc_drop_limit_at_high_T = 5d-3 ! for center logT > 9.45
+
+
+
+         delta_Ye_highT_limit = 1d-3
+
+         okay_to_reduce_gradT_excess = .true.
+
+         gradT_excess_f1 = 1d-4
+         gradT_excess_f2 = 1d-2
+         gradT_excess_age_fraction = 0.9d0
+
+         gradT_excess_lambda1 = 1.0
+         gradT_excess_beta1 = 0.35
+
+         gradT_excess_lambda2 = 0.5
+         gradT_excess_beta2 = 0.25
+
+         gradT_excess_dlambda = 0.1
+         gradT_excess_dbeta = 0.1
+!---
+
+
+!-------|CONVECTION|----------------
+         use_Ledoux_criterion = .false.
+         MLT_option = 'Cox'
+         mixing_length_alpha = 1.6
+
+         screening_mode = 'extended'
+
+!------------|MASS LOSS|-----------------------------
+         trace_super_eddington_wind_boost = .true.
+	Pextra_factor = 1
+
+!----------|OVERSHOOTING|-------------------------------
+ 	!alpha = f - f0 = 0.1
+
+ 	!nonburn
+ 	overshoot_f0_above_nonburn_core = 0.01
+	step_overshoot_f_above_nonburn_core = 0.11
+
+	overshoot_f0_above_nonburn_shell = 0.01
+	step_overshoot_f_above_nonburn_shell = 0.11
+
+	overshoot_f0_below_nonburn_shell = 0.01
+	step_overshoot_f_below_nonburn_shell = 0.11
+
+	!h
+	overshoot_f0_above_burn_h_core = 0.01
+	step_overshoot_f_above_burn_h_core = 0.11
+
+	overshoot_f0_above_burn_h_shell = 0.01
+	step_overshoot_f_above_burn_h_shell = 0.11
+
+	overshoot_f0_below_burn_h_shell = 0.01
+	step_overshoot_f_below_burn_h_shell = 0.11
+
+	!he
+	overshoot_f0_above_burn_he_core = 0.01
+	step_overshoot_f_above_burn_he_core = 0.11
+
+	overshoot_f0_above_burn_he_shell = 0.01
+	step_overshoot_f_above_burn_he_shell = 0.11
+
+	overshoot_f0_below_burn_he_shell = 0.01
+	step_overshoot_f_below_burn_he_shell = 0.11
+
+	!z
+	overshoot_f0_above_burn_z_core = 0.01
+	step_overshoot_f_above_burn_z_core = 0.11
+
+	overshoot_f0_above_burn_z_shell = 0.01
+	step_overshoot_f_above_burn_z_shell = 0.11
+
+	overshoot_f0_below_burn_z_shell = 0.01
+	step_overshoot_f_below_burn_z_shell = 0.11
+
+
+/ ! end of controls namelist
+
+
+&pgstar
+
+	pgstar_lw = 6
+
+	HR_win_flag = .true.
+
+	! History_Track1_win_flag = .true.
+	! 	History_Track1_win_width = 6
+	! 	History_Track1_win_aspect_ratio = 0.75
+  !
+	! 	History_Track1_yname = 'star_mass'
+	! 	History_Track1_xname = 'log_Teff'
+	! 	History_Track1_yaxis_label = 'Mass'
+	! 	History_Track1_xaxis_label = 'LogTeff'
+  !
+	! History_Track2_win_flag = .true.
+	! 	History_Track2_win_width = 6
+	! 	History_Track2_win_aspect_ratio = 0.75
+  !
+	! 	History_Track2_yname = 'num_zones'
+	! 	History_Track2_xname = 'log_Teff'
+	! 	History_Track2_yaxis_label = 'N Zones'
+	! 	History_Track2_xaxis_label = 'LogTeff'
+
+	History_Track3_win_flag = .true.
+		History_Track3_win_width = 6
+		History_Track3_win_aspect_ratio = 0.75
+
+		History_Track3_yname = 'surf_avg_v_rot'
+		History_Track3_xname = 'log_Teff'
+		History_Track3_yaxis_label = 'surf_avg_v_rot'
+		History_Track3_xaxis_label = 'LogTeff'
+
+	History_Track4_win_flag = .true.
+		History_Track4_win_width = 6
+		History_Track4_win_aspect_ratio = 0.75
+
+		History_Track4_yname = 'surf_avg_v_rot'
+		History_Track4_xname = 'star_mass'
+		History_Track4_yaxis_label = 'surf_avg_v_rot'
+		History_Track4_xaxis_label = 'star_mass'
+
+	Kipp_win_flag = .true.
+		Kipp_show_luminosities = .true.
+		Kipp_show_mixing = .true.
+
+	Abundance_win_flag = .true.
+
+	Power_win_flag = .true.
+
+	Mixing_win_flag = .true.
+
+	Summary_History_win_flag = .true.
+
+	Summary_Burn_win_flag = .true.
+
+
+/ ! end of pgstar namelist
