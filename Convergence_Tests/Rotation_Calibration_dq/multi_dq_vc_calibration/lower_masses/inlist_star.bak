@@ -1,0 +1,77 @@
+! inlist_massive_rotating
+
+! note: this inlist is done after 1st doing inlist_massive_defaults
+! so can override defaults as desired.
+
+&star_job
+
+
+      new_rotation_flag = .true.
+      change_rotation_flag = .false.  ! rotation off until near zams
+      new_surface_rotation_v = 265
+      near_zams_relax_initial_surface_rotation_v = .true.
+
+        pgstar_flag = .true.
+
+
+/ ! end of star_job namelist
+
+
+&controls
+
+	star_history_name = 'history.data'
+      log_directory = 'LOGS_12M0_dq0.005_vc1e-5'
+      photo_directory = 'photos_15M0_dq0.005_vc1e-5'
+	profile_data_prefix = 'profile'
+	profiles_index_name = 'profiles.index'
+
+				max_age = 0.5e4 ! For Rotation Calibration
+
+         max_number_backups = 400
+         max_number_retries = 900
+
+      initial_mass = 12
+         initial_z = 0.014
+         initial_y = 0.266
+         Zbase = 0.014
+      zams_filename = 'z0014_y0266_ekstrom_12.data'
+
+
+!--------------|DISPLAY-ON-TERMINAL SETTINGS|----------
+
+         num_trace_history_values = 8
+         trace_history_value_name(1) = 'star_mass'
+         trace_history_value_name(2) = 'log_abs_mdot'
+         trace_history_value_name(3) = 'surf_avg_v_rot'
+         trace_history_value_name(4) = 'log_g'
+         trace_history_value_name(5) = 'surf_avg_v_div_v_crit'
+         trace_history_value_name(6) = 'center he4'
+         trace_history_value_name(7) = 'center h1'
+         trace_history_value_name(8) = 'star_age'
+
+
+         photo_interval = 50
+         profile_interval = 50
+         history_interval = 1
+         terminal_interval = 10
+         write_header_frequency = 5
+
+
+!-----------|WIND CONTROLS|----------------------
+ 	use_other_wind = .true.
+
+	!de Jager wind efficiency
+	x_ctrl(1) = 1
+	!Meynet wind efficiency
+	x_ctrl(2) = 1
+
+!------------|WHEN TO STOP|----------------
+
+         log_center_temp_limit = 9 !Para quando começar a fundir carbono
+
+/ ! end of controls namelist
+
+&pgstar
+
+
+/ ! end of pgstar namelist
