@@ -1,0 +1,104 @@
+! inlist_massive_rotating
+
+! note: this inlist is done after 1st doing inlist_massive_defaults
+! so can override defaults as desired.
+
+&star_job
+      
+     
+      new_rotation_flag = .true.
+      change_rotation_flag = .false.  ! rotation off until near zams
+      new_surface_rotation_v = 282 !295
+      near_zams_relax_initial_surface_rotation_v = .true.     
+
+      pgstar_flag = .true.
+      
+      
+/ ! end of star_job namelist
+
+
+&controls
+		
+
+		!log_directory = 'LOGS_x25'  								!Se tiver Mdot[RSG] x25 salva nesse diretorio
+         max_number_backups = 400
+         max_number_retries = 900
+         
+         initial_mass = 25 ! in Msun units
+         initial_z = 0.014
+         initial_y = 0.266
+         Zbase = 0.014
+         zams_filename = 'matheus-geneva-25.data'
+     
+         varcontrol_target = 3d-4
+         !mesh_delta_coeff = 1
+         !mesh_delta_coeff_for_highT = 2
+
+      
+			!O que são essas coisas??
+         !----------------
+         !dX_nuc_drop_limit = 1d-2 ! 5d-3
+ 
+         !delta_lgT_cntr_limit = 0.01  
+             ! limit for magnitude of change in log10 temperature at center   
+         !delta_lgT_cntr_hard_limit = 0.03
+ 
+         !delta_lgRho_cntr_limit = 0.05  
+             ! limit for magnitude of change in log10 density at center   
+         !delta_lgRho_cntr_hard_limit = 0.15
+         
+		!------------------------------   	
+!--------------|DISPLAY-ON-TERMINAL SETTINGS|----------
+         
+         num_trace_history_values = 8
+         trace_history_value_name(1) = 'star_mass'        
+         trace_history_value_name(2) = 'log_abs_mdot'        
+         trace_history_value_name(3) = 'surf_avg_v_rot'        
+         trace_history_value_name(4) = 'log_g'        
+         trace_history_value_name(5) = 'surf_avg_v_div_v_crit'       
+         trace_history_value_name(6) = 'center he4'
+         trace_history_value_name(7) = 'center h1' 
+
+         photo_interval = 50
+         profile_interval = 50
+         history_interval = 1
+         terminal_interval = 10
+         write_header_frequency = 5
+
+
+
+!---------------|Supra Ledd STUFF|-------------
+
+		!super_eddington_wind_max_boost = 3
+		!wind_boost_full_on_L_div_Ledd = 5
+    
+!-----------|WIND CONTROLS|----------------------
+        hot_wind_scheme = 'Vink'
+        Vink_scaling_factor = 1
+
+
+        hot_wind_full_on_T = 7943 !logTeff = 3.9             !Liga Vink quando logTeff > 3.9
+        hot_wind_full_off_T = 7943 !logTeff = 3.9            !Desliga Vink quando logTeff < 3.9
+        cool_wind_full_on_T = 7943            				!Liga de Jager quando logTeff < 3.9
+        cool_wind_full_off_T = 7943            				!Desliga de Jager quando logTeff > 3.9
+          
+        cool_wind_RGB_scheme = 'de Jager'
+        van_Loon_scaling_factor = 1
+        cool_wind_AGB_scheme = 'de Jager'
+        de_Jager_scaling_factor = 1
+        RGB_to_AGB_wind_switch = 1d-400
+
+!------------|WHEN TO STOP|----------------
+
+
+        log_Teff_lower_limit = 3.7 !Parar para trocar Vento Frio para van Loon
+!        log_Teff_upper_limit = 3.7 !Parar para trocar Vento Frio para de Jager         
+
+        log_center_temp_limit = 9 !Para quando começar a fundir carbono
+
+/ ! end of controls namelist
+
+&pgstar
+         
+
+/ ! end of pgstar namelist
