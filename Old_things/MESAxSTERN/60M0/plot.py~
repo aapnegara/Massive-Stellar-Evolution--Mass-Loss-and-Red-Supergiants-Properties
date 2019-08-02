@@ -1,0 +1,13 @@
+import mesa_reader as mr
+import matplotlib.pyplot as mpl
+
+h20 = mr.MesaData('history_20.data')
+h50 = mr.MesaData('history_50.data')
+
+mpl.plot(h50.log_Teff,h50.log_L,'r-', h20.log_Teff,h20.log_L,'b-', linewidth=2.0)
+mpl.gca().invert_xaxis()
+mpl.title('Comparacao evolutiva entre estrelas de 20M0 e 50M0 ate a fracao de X ser 0,01.')
+mpl.xlabel('Log_Teff')
+mpl.ylabel('Log_L')
+
+mpl.show()

@@ -1,0 +1,17 @@
+! inlist_zams_specification
+
+&create_zams_job
+
+   create_z = 0.0088
+   create_y = 0.264
+   zams_name = 'z00088_y0264_brott_10_60'
+   
+   ! do masses 10**lgm, for lgm = mlo to mhi by dmass
+   mlo = 1.0
+   mhi = 1.8
+   dmass = 0.3d0
+
+
+/ ! end of create_zams_job
+
+

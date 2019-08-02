@@ -1,0 +1,7 @@
+1:t [yr] 2:M/Msun  3:Teff[K]  4:log(L/Lsun)  5:R/Rsun 6:log(Mdot)[Msun/yr] 7:logg 8:v_surf [km/s] 9:P[days] 10:v_crit[km/s] 11:Gamma 12:H 13:He 14:Li 15:Be 16:B  17:C 18:N 19:O 20:F 21:Ne 22:Na 23:Mg 24:Al 25:Si 26:Fe 27:sH1  28:sHe3  29:sHe4  30:sLi7 31:sBe9  32:sB10 33:sB11 34:sC12 35:sC13 36:sN14  37:sN15  38:sO16  39:sO17  40:sO18 41:sF19 42:sNe20  43:sNe21 44:sNe22  45:sNa23  46:sMg24 47:sMg25 48:sMg26 49:sAl26 50:sAl27  51:sSi28  52:sSi29 53:sSi30  54:sFe56 55:cH1  56:cHe3  57:cHe4  58:cLi7  59:cBe9  60:cB10  61:cB11 62:cC12  63:cC13 64:cN14  65:cN15  66:cO16  67:cO17  68:cO18 69:cF19 70:cNe20  71:cNe21 72:cNe22  73:cNa23  74:cMg24  74:cMg25 76:cMg26 77:cAl26 78:cAl27  79:cSi28  80:cSi29 81:cSi30  82:cFe56
+
+274
+269
+265
+264
+262

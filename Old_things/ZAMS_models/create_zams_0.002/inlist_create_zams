@@ -1,0 +1,21 @@
+
+&star_job
+      
+/ ! end of star_job namelist
+
+&controls
+
+   history_interval = 20
+   terminal_interval = 5
+         
+! test with "Gold Standard" tolerances
+      newton_iterations_limit = 20
+      max_tries = 20
+      iter_for_resid_tol2 = 30
+      tol_residual_norm1 = 1d-9
+      tol_max_residual1 = 1d-7
+      tol_correction_norm = 1d-9
+      tol_max_correction = 1d-7
+
+/ ! end of controls namelist
+

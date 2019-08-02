@@ -1,0 +1,116 @@
+! inlist to compare non-rotating MESA models with Ekstroem et al. (2012) models. Published by Keszthelyi, Puls, Wade (2017) A&A 598 A4. (Figure 1.)
+
+&star_job
+
+ 	 ! display on-screen plots
+    	 pgstar_flag = .true.
+
+   	  pause_before_terminate = .true. 
+
+       !========= new METALLICITY ================================================
+
+ 	   	relax_initial_Z = .true.    
+     	new_Z = 14d-3
+		
+		relax_initial_Y = .true.
+		new_Y = 0.266
+
+		set_uniform_initial_composition = .true.
+		
+		initial_h1 = 0.720
+		initial_he4 = 0.266
+
+		initial_h2 = 0.0
+		initial_he3 = 4.415d-5     
+
+		initial_zfracs = 0         ! almost 5 is used in Ekstroem et al except for Ne. adapted from Asplund et al 2005. 
+					               ! 0 when you define them in controls
+
+    
+/  !end of star_job namelist
+
+
+&controls
+
+          do_history_file = .true.
+	      max_model_number = 160000  
+          history_interval = 40                                      
+
+         !========= The OUTPUT ===========  - filename - 
+
+        star_history_name = '../Geneva/M60_Geneva.data'
+
+         !==========================================================================
+
+         ! star_history_header_name = ''  ! this writes the header separately
+	 	 	
+ 
+	! INITIAL specifications
+
+        !--------  initial MASS ------------
+  	
+	  initial_mass = 60
+
+        !------------------------------------
+
+        ! initial fraction of elements, only when initial_zfracs = 0. 
+
+ 	z_fraction_c = 0.180
+	z_fraction_n = 0.167
+	z_fraction_o = 0.186
+
+	z_fraction_ne = 0.174
+	z_fraction_na = 0.132
+	z_fraction_mg = 0.161
+
+	!--------------------------------------------------------
+ 
+    ! STOPPING options         
+         
+    ! max_age = 5d6
+               
+     Teff_lower_limit = 11d3
+           
+	  ! stop when the center mass fraction of h1 drops below this limit
+	       ! xa_central_lower_limit_species(1) = 'h1'
+   	       ! xa_central_lower_limit(1) = 2d-1
+
+
+     !======= MASS-LOSS RATES ============================= 
+      
+        ! enhance mass loss due to rot. see control defaults for Eq. 
+        ! mdot_omega_power = 0.43  
+      
+        ! use_other_wind = .true. 
+            
+    	 RGB_wind_scheme = 'Dutch'    ! wind schemes and naming have been changed in new versions!
+         Dutch_wind_eta = 1       
+  
+
+     !=============== MIXING LENGTH parameters========================
+
+            mixing_length_alpha = 1.0d0           ! 1.6 until 40 Msun, 1.0 above 40 Msun 
+            allow_semiconvective_mixing = .false.  
+
+			
+     ! ============= OVERSHOOTING ========================
+    ! This procedure gives back the 0.1 H_P extension used by Ekstroem et al. 
+	 
+	 !-------- exponential decay--------------------- 
+	
+	    overshoot_f_above_burn_h = 0.001
+   
+	!---------overshoot distance in the expense of the core -------------------
+ 
+       overshoot_f0_above_burn_h = 0.01
+      
+ 	!-----------step function --extension above the core----------------------
+	
+      step_overshoot_f_above_burn_h = 0.11
+    	
+      step_overshoot_D0_coeff = 1
+
+    !----------------------------------------------------------------    
+
+
+/ ! end of controls namelist

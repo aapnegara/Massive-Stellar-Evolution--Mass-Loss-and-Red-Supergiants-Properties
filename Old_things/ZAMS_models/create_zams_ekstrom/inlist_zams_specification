@@ -1,0 +1,17 @@
+! inlist_zams_specification
+
+&create_zams_job
+
+   create_z = 0.014
+   create_y = 0.266
+   zams_name = 'z0014_y0266_ekstrom_12'
+   
+   ! do masses 10**lgm, for lgm = mlo to mhi by dmass
+   mlo = 1.1
+   mhi = 1.1
+   dmass = 0.3d0
+
+
+/ ! end of create_zams_job
+
+
